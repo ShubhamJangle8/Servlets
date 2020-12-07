@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 		urlPatterns = {"/LoginServlet" },
 		initParams = {
 				@WebInitParam(name = "user", value = "Shubham"),
-				@WebInitParam(name = "password", value = "Capgemini")
+				@WebInitParam(name = "password", value = "ShuRajRek@0")
 		}
 )
 public class LoginServlet extends HttpServlet{
@@ -30,6 +30,12 @@ public class LoginServlet extends HttpServlet{
 			RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.html");
 			PrintWriter out = response.getWriter();
 			out.println("<font color=red>User name must contain min 3 characters and start with caps</font>");
+			rd.include(request, response);
+		}
+		else if(!pwd.matches("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$")) {
+			RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.html");
+			PrintWriter out = response.getWriter();
+			out.println("<font color=red>Password criteria not met</font>");
 			rd.include(request, response);
 		}
 		else if(userID.equals(user) && password.equals(pwd)) {
